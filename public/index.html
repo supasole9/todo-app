@@ -10,6 +10,11 @@
 <body>
      <div class="wrapper">
           <h1>Todo App REST-API</h1>
+          <form action="/api/todos" method="post">
+          <input type="text" name="name" placeholder="Task">
+          <input type="text" name="priority" placeholder="1-10">
+          <button type="submit">Submit</button>
+      </form>
           <div id="todolist"></div>
      </div>
 
@@ -35,11 +40,7 @@
                     return(
                          <div id="todos-container">
                          <form id="search" onSubmit={this.handleSearch}>
-                              <label>Enter a Task Name</label>
-                              <input type="text" refs="name" placeholder="Task" required />
-                              <label>Enter a Priority Level</label>
-                              <input type="text" refs="priority" placeholder="Priority" required />
-                              <input type="submit" value="See All Tasks" />
+                         <input type="submit" value="See All Tasks" />
                          </form>
                          <ul>{todos}</ul>
                          </div>
