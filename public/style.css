@@ -1,0 +1,11 @@
+body{
+    font-family: Raleway;
+    color: #555;
+    background: #ff5252;
+    margin: 0;
+}
+
+.wrapper{
+     margin: 0 auto;
+     width: 90%;
+}

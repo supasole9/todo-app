@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <link rel="stylesheet" href="./style.css" media="screen">
+     <title>Todo App</title>
+</head>
+<body>
+     <div class="wrapper">
+          <h1>Todo App REST-API</h1>
+          <div id="todolist"></div>
+     </div>
+
+     <script type="text/babel">
+          var Todos = React.createClass({
+               getInitialState: function(){
+                    return({
+                         todos:[]
+                    });
+               },
+               render: function(){
+                    var todos = this.state.todos;
+                    if (todos) {
+                    todos = todos.map(function(todos, index){
+                         return(
+                              <li key={index}>
+                                   <span className="task-name">{todos.name}</span>
+                                   <span className="task-priority">{todos.priority}</span>
+                              </li>
+                         )
+                    });
+                    }
+                    return(
+                         <div id="todos-container">
+                         <form id="search" onSubmit={this.handleSearch}>
+                              <label>Enter a Task Name</label>
+                              <input type="text" refs="name" placeholder="Task" required />
+                              <label>Enter a Priority Level</label>
+                              <input type="text" refs="priority" placeholder="Priority" required />
+                              <input type="submit" value="See All Tasks" />
+                         </form>
+                         <ul>{todos}</ul>
+                         </div>
+                    );
+               },
+               handleSearch: function(e){
+                    e.preventDefault();
+                    fetch('/api/todos').then(function(data){
+                         return data.json();
+                    }).then(json => {
+                         this.setState({
+                              todos:json
+                         });
+                    });
+               }
+          });
+
+     ReactDOM.render(<Todos />, document.getElementById("todolist"))
+
+
+
+     </script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="https://unpkg.com/react@15/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>﻿
+</body>
+</html>
